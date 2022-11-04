@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading.Channels;
 using DesignPatterns;
 
 // task1
@@ -63,6 +62,7 @@ d1.DecorationOperation();
 Console.WriteLine("END OF TASK 4:");             
 Console.WriteLine();
 
+//task5
 Console.WriteLine("START OF TASK 5:");
 Console.OutputEncoding = Encoding.UTF8;
 IFigure figure = new Rectangle(10, 20);
@@ -83,6 +83,7 @@ clonedFigure.GetInfo();
 Console.WriteLine("END OF TASK 5:");             
 Console.WriteLine();
 
+//task6
 Console.WriteLine("START OF TASK 6:");
 Console.WriteLine("FACADE:");
 
