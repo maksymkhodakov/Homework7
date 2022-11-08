@@ -53,12 +53,17 @@ Console.WriteLine();
 
 // task4
 Console.WriteLine("START OF TASK 4:");
-var c = new ConcreteTreeComponent();
-var d1 = new Tree();
+var t = new Tree();
+var d1 = new Garland();
+var d2 = new Garland();
+var d3 = new Garland();
 
 // Link decorators
-d1.SetComponent(c);
-d1.DecorationOperation();
+d1.SetComponent(t);
+d2.SetComponent(d1);
+d3.SetComponent(d2);
+
+d3.DecorateRoom();
 Console.WriteLine("END OF TASK 4:");             
 Console.WriteLine();
 

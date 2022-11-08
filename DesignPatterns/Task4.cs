@@ -1,49 +1,74 @@
 namespace DesignPatterns;
 
 // "Component"
-internal abstract class AbstractTreeDecoration
+internal abstract class AbstractTree
 {
-    public abstract void DecorationOperation();
+    public abstract void DecorateRoom();
 }
 
 // "ConcreteComponent"
-internal class ConcreteTreeComponent : AbstractTreeDecoration
+internal class Tree : AbstractTree
 {
-    public override void DecorationOperation()
+    public override void DecorateRoom()
     {
-        Console.WriteLine("LIGHT!");
+        Console.WriteLine("ROOM IS DECORATED BY ME !!!");
     }
 }
-// "Decorator"
-internal abstract class Decorator : AbstractTreeDecoration
-{
-    protected AbstractTreeDecoration AbstractTreeDecoration;
 
-    public void SetComponent(AbstractTreeDecoration abstractTreeDecoration)
+// "Decorator"
+internal abstract class Decorator : AbstractTree
+{
+    protected AbstractTree abstractTree;
+
+    public void SetComponent(AbstractTree abstractTree)
     {
-        this.AbstractTreeDecoration = abstractTreeDecoration;
+        this.abstractTree = abstractTree;
     }
-    public override void DecorationOperation()
+    public override void DecorateRoom()
     {
-        if (AbstractTreeDecoration != null)
+        if (abstractTree != null)
         {
-            AbstractTreeDecoration.DecorationOperation();
+            abstractTree.DecorateRoom();
         }
     }
 }
     
-// "ConcreteDecorator" as tree
-internal class Tree : Decorator
+// "ConcreteDecorator" of tree
+internal class Garland : Decorator
 {
-    public override void DecorationOperation()
+    private Color color;
+    private bool isSwitchedOn;
+    public override void DecorateRoom()
     {
-        base.DecorationOperation();
-        AddedBehavior();
-        Console.WriteLine("Decoration Tree!");
+        base.DecorateRoom();
+        Status();
+        Console.WriteLine("I AM GARLAND decoration of Tree!");
     }
 
-    void AddedBehavior()
+    private void Status()
     {
-        Console.WriteLine("we are inside of a tree decorator!");
+        GetColor();
+        SwitchOnGarland();
+        Console.WriteLine("My color: " + color + ", am I switched? : " + isSwitchedOn);
     }
+
+    private void GetColor()
+    {
+        Console.WriteLine("Enter color: ");
+        var val = Console.ReadLine() ?? throw new InvalidOperationException();
+        if (Enum.IsDefined(typeof(Color), val))
+        {
+            color = Enum.Parse<Color>(val);
+        }
+    }
+
+    private void SwitchOnGarland()
+    {
+        isSwitchedOn = true;
+    }
+}
+
+internal enum Color
+{
+    Black, Green, Blue, Yellow, White, Red, Purple
 }
